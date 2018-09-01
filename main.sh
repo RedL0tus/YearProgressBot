@@ -1,9 +1,5 @@
 #!/bin/bash
 
-export LENGTH=20;
-export API_TOKEN="";
-export CHAT_ID="";
-
 function GET_PERCENTAGE {
         local CURRENT_YEAR=$(date +%Y);
         if [ $((CURRENT_YEAR % 400)) -eq 0 ]; then

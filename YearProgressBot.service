@@ -1,0 +1,15 @@
+[Unit]
+Description=Year Progress Bot
+After=network-online.target
+
+[Service]
+Type=simple
+Environment="LENGTH=20"
+Environment="API_TOKEN=123456789:ABCdEFGHIJKLMnop1QrSt2Uv3Wx_yzaBCdef"
+Environment="CHAT_ID=-1234567890"
+ExecStart=/path/to/main.sh
+Restart=always
+User=nobody
+
+[Install]
+WantedBy=multi-user.target
