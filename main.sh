@@ -33,6 +33,7 @@ function DISPLAY {
 function MAIN {
 	local BAR=$(DISPLAY);
 	local BAR_NOW=$(DISPLAY);
+        echo ">>> Bot started.";
 	curl -X POST "https://api.telegram.org/bot${API_TOKEN}/sendMessage" -d "chat_id=${CHAT_ID}&text=${BAR_NOW}";
 	while true; do
 		BAR_NOW=$(DISPLAY);
