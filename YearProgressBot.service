@@ -7,7 +7,8 @@ Type=simple
 Environment="LENGTH=20"
 Environment="API_TOKEN=123456789:ABCdEFGHIJKLMnop1QrSt2Uv3Wx_yzaBCdef"
 Environment="CHAT_ID=-1234567890"
-ExecStart=/bin/bash /path/to/main.sh
+Environment="WORKDIR=/path/to/YearProgressBot"
+ExecStart=/bin/bash /path/to/YearProgressBot/main.sh
 Restart=always
 User=nobody
 

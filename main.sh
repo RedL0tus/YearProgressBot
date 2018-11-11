@@ -5,6 +5,8 @@
 # terms of the Do What The Fuck You Want To Public License, Version 2,
 # as published by Sam Hocevar. See the LICENSE file for more details.
 
+set -e;
+
 function GET_PERCENTAGE {
         local CURRENT_YEAR=$(date +%Y);
         if [ $((CURRENT_YEAR % 400)) -eq 0 ]; then
@@ -36,14 +38,17 @@ function DISPLAY {
 }
 
 function MAIN {
-	local BAR=$(DISPLAY);
+	local BAR="";
 	local BAR_NOW=$(DISPLAY);
+	if [ -f "$WORKDIR"/bar ]; then
+		BAR=$(cat "$WORKDIR"/bar);
+	fi
         echo ">>> Bot started.";
-	curl -X POST "https://api.telegram.org/bot${API_TOKEN}/sendMessage" -d "chat_id=${CHAT_ID}&text=${BAR_NOW}";
 	while true; do
 		BAR_NOW=$(DISPLAY);
 		if [ "$BAR" != "$BAR_NOW" ]; then
 			curl -X POST "https://api.telegram.org/bot${API_TOKEN}/sendMessage" -d "chat_id=${CHAT_ID}&text=${BAR_NOW}";
+			echo $BAR_NOW > "$WORKDIR"/bar;
 			BAR=$BAR_NOW;
 		fi
 		sleep 100;
