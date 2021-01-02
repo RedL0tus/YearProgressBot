@@ -18,8 +18,8 @@ function GET_PERCENTAGE {
         else
                 local TOTAL_DAYS=365;
         fi
-        CURRENT_DAY=$(echo "$(date +%j) + 0" | bc)
-        echo $((200*$CURRENT_DAY/$TOTAL_DAYS % 2 + 100*$CURRENT_DAY/$TOTAL_DAYS));
+        CURRENT_DAY=$(echo "$(date +%j) + 0" | bc);
+	echo $(($CURRENT_DAY*100/$TOTAL_DAYS));
 }
 
 function DISPLAY {
