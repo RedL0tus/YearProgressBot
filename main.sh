@@ -8,32 +8,32 @@
 set -e;
 
 function GET_PERCENTAGE {
-        local CURRENT_YEAR=$(date +%Y);
-        if [ $((CURRENT_YEAR % 400)) -eq 0 ]; then
-                local TOTAL_DAYS=366;
-        elif [ $((CURRENT_YEAR % 100)) -eq 0 ]; then
-                local TOTAL_DAYS=365;
-        elif [ $((CURRENT_YEAR % 4)) -eq 0 ]; then
-                local TOTAL_DAYS=366;
-        else
-                local TOTAL_DAYS=365;
-        fi
-        CURRENT_DAY=$(echo "$(date +%j) + 0" | bc);
+	local CURRENT_YEAR=$(date +%Y);
+	if [ $((CURRENT_YEAR % 400)) -eq 0 ]; then
+		local TOTAL_DAYS=366;
+	elif [ $((CURRENT_YEAR % 100)) -eq 0 ]; then
+		local TOTAL_DAYS=365;
+	elif [ $((CURRENT_YEAR % 4)) -eq 0 ]; then
+		local TOTAL_DAYS=366;
+	else
+		local TOTAL_DAYS=365;
+	fi
+	CURRENT_DAY=$(echo "$(date +%j) + 0" | bc);
 	echo $(($CURRENT_DAY*100/$TOTAL_DAYS));
 }
 
 function DISPLAY {
-        local PERCENTAGE=$(GET_PERCENTAGE);
-        local FILLED=$(($LENGTH*$PERCENTAGE/100));
-        local BLANK=$(($LENGTH-$FILLED));
-        local BAR="";
+	local PERCENTAGE=$(GET_PERCENTAGE);
+	local FILLED=$(($LENGTH*$PERCENTAGE/100));
+	local BLANK=$(($LENGTH-$FILLED));
+	local BAR="";
 	for ((i=0;i<$FILLED;i++)) {
-                BAR=${BAR}"▓";
-        }
-        for ((i=0;i<$BLANK;i++)) {
-                BAR=${BAR}"░";
-        }
-        BAR=${BAR}" "${PERCENTAGE}"%";
+		BAR=${BAR}"▓";
+	}
+	for ((i=0;i<$BLANK;i++)) {
+		BAR=${BAR}"░";
+	}
+	BAR=${BAR}" "${PERCENTAGE}"%";
 	echo $BAR;
 }
 
@@ -43,7 +43,7 @@ function MAIN {
 	if [ -f "$WORKDIR"/bar ]; then
 		BAR=$(cat "$WORKDIR"/bar);
 	fi
-        echo ">>> Bot started.";
+	echo ">>> Bot started.";
 	while true; do
 		BAR_NOW=$(DISPLAY);
 		if [ "$BAR" != "$BAR_NOW" ]; then
